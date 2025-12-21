@@ -34,6 +34,16 @@ Docker Compose is used locally to orchestrate the FastAPI service and PostgreSQL
 This setup simplifies local development and testing while keeping the database external
 to Kubernetes deployments.
 
+## Application Validation (FastAPI)
+
+The containerized FastAPI application was validated locally using Docker Compose.
+The API is accessible through Swagger UI, which confirms that the application
+starts correctly and exposes the expected endpoints.
+
+![FastAPI Swagger UI](SS/swagger.png)
+
+![Persistant Data](SS/testFastAPI.png)
+
 ## CI/CD Pipeline
 
 An automated CI/CD pipeline is implemented using GitHub Actions.
@@ -42,6 +52,16 @@ Pipeline stages:
 - Test stage: executes automated tests on each push and pull request
 - Build stage: builds the Docker image
 - Registry push stage: pushes the image to Docker Hub
+This project uses GitHub Actions to implement a CI/CD pipeline with the following stages:
+
+- Test stage (pytest smoke tests)
+- Build stage (Docker image build)
+- Push stage (Docker image pushed to Docker Hub)
+
+Docker Hub authentication is handled securely using GitHub repository secrets.
+
+### Successful CI Pipeline Run
+![CI Pipeline Success](SS/ci_pipeline_success.png)
 
 ### Advanced CI/CD Feature (Bonus)
 As an advanced CI/CD feature, Docker images are tagged using both:
@@ -93,3 +113,10 @@ and Kubernetes configuration. The focus was placed on correctness, clarity, and 
 rather than tool overuse or unnecessary complexity.
 
 Docker Hub authentication configured for CI pipeline.
+
+
+## Docker Image Registry (Docker Hub)
+
+The CI/CD pipeline automatically builds and pushes the application Docker image to Docker Hub.
+
+![Docker Hub Repository](SS/dockerhub_repository.png)
