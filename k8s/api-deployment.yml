@@ -22,3 +22,17 @@ spec:
                 name: app-config
             - secretRef:
                 name: db-secret
+
+          readinessProbe:
+            httpGet:
+              path: /openapi.json
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /openapi.json
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10

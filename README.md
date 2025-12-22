@@ -165,6 +165,19 @@ retrieved correctly from the database.
 ![Kubernetes GET Tasks](SS/k8s_get_tasks.png)
 
 ---
+### Readiness and Liveness Probes
+
+Readiness and liveness probes are configured on the FastAPI container using
+HTTP GET requests on the `/openapi.json` endpoint.
+
+The readiness probe ensures that traffic is only routed to pods that are fully
+initialized and ready to serve requests. The liveness probe allows Kubernetes
+to automatically restart the container if the application becomes unresponsive.
+
+This configuration enables Kubernetes to continuously monitor the health of the
+application without requiring a custom health endpoint.
+
+![Kubernetes Probes](SS/k8s_probes.png)
 
 ### Summary
 
@@ -189,12 +202,23 @@ as a dedicated workload.
 This corresponds to **Kubernetes Option A (database inside the cluster)**.
 
 The database is managed through Kubernetes resources and accessed internally by
-the FastAPI application via a ClusterIP service. This approach was chosen to:
+the FastAPI application via a ClusterIP service.
 
+For simplicity within the scope of this project, PostgreSQL was deployed using a
+standard Kubernetes Deployment rather than a StatefulSet with persistent volumes.
+PersistentVolumeClaims and a headless service were not configured in this version,
+as the focus was placed on correct Kubernetes orchestration, networking, and API
+validation rather than long-term storage durability.
+
+This approach was chosen to:
 - Ensure full portability of the application stack
 - Keep all components managed by Kubernetes
 - Simplify deployment and networking using Kubernetes service discovery
 - Avoid external dependencies during deployment and evaluation
+
+
+## Architecture Diagram
+![Architecture Diagram](SS/architecture_diagram.png)
 
 
 ## Conclusion
