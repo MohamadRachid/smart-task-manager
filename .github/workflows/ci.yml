@@ -31,7 +31,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && secrets.DOCKERHUB_USERNAME != ''
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -43,13 +43,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract commit SHA
-        id: vars
         run: echo "SHA_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:latest .
           docker tag ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:latest \
-                     ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:${{ env.SHA_TAG }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:${{ env.SHA_TAG }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:${{ env.SHA_TAG }}
