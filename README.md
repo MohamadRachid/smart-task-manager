@@ -1,11 +1,10 @@
-# Smart Task Manager with Priority Prediction
+# Smart Task Manager — CI/CD Project
 
-This project is a DevOps-oriented application designed to demonstrate containerization,
-CI/CD automation, and Kubernetes deployment practices.
+This project was developed collaboratively.
+My focus was on CI/CD automation, Dockerization, and Kubernetes-based deployment.
 
-The application exposes a REST API for managing tasks and assigns priorities based on
-task attributes. The main focus of the project is the DevOps pipeline and infrastructure
-rather than application complexity.
+This repository represents my personal portfolio version of the project.
+
 
 ## Architecture Overview
 
@@ -237,6 +236,7 @@ soundness rather than unnecessary complexity.
 
 Docker Hub authentication was configured to support container image publishing
 and reuse across environments.
+
 
 
 
