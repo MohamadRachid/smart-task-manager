@@ -1,3 +1,4 @@
+
 name: CI Pipeline
 
 on:
@@ -31,8 +32,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     needs: test
-    # Only allow Docker push from the main repository (not forks)
-    if: false
+    if: false   # disabled for forked portfolio repository
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -53,4 +53,3 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:${{ env.SHA_TAG }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:${{ env.SHA_TAG }}
-
