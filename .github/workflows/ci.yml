@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     # Only allow Docker push from the main repository (not forks)
-    if: github.repository == 'MohamadRachid/smart-task-manager' && github.ref == 'refs/heads/main'
+    if: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -53,3 +53,4 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:${{ env.SHA_TAG }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smart-task-manager:${{ env.SHA_TAG }}
+
